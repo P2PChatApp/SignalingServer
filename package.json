@@ -1,0 +1,17 @@
+{
+  "name": "rtc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint:prettier": "prettier --check .",
+    "format": "yarn lint:prettier --write"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "prettier": "^3.0.2",
+    "ws": "^8.13.0"
+  }
+}
