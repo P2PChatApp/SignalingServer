@@ -1,20 +1,29 @@
 {
-  "name": "rtc",
+  "name": "signalingserver",
   "version": "1.0.0",
-  "description": "",
-  "main": "src/index.js",
-  "scripts": {
-    "lint:prettier": "prettier --check .",
-    "format": "yarn lint:prettier --write",
-    "start:dev": "node src/index.js",
-    "start": "run-s format start:dev"
+  "description": "シグナリングサーバー",
+  "main": "index.js",
+  "devDependencies": {
+    "eslint": "^8.47.0"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "./node_modules/.bin/eslint ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/P2PChatApp/SignalingServer.git"
+  },
+  "keywords": [
+    "P2P"
+  ],
+  "author": "P2PChatApp",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/P2PChatApp/SignalingServer/issues"
+  },
+  "homepage": "https://github.com/P2PChatApp/SignalingServer#readme",
   "dependencies": {
-    "npm-run-all": "^4.1.5",
-    "prettier": "^3.0.2",
     "ws": "^8.13.0"
   }
 }
