@@ -2,15 +2,18 @@
   "name": "rtc",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "lint:prettier": "prettier --check .",
-    "format": "yarn lint:prettier --write"
+    "format": "yarn lint:prettier --write",
+    "start:dev": "node src/index.js",
+    "start": "run-s format start:dev"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "npm-run-all": "^4.1.5",
     "prettier": "^3.0.2",
     "ws": "^8.13.0"
   }
