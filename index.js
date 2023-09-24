@@ -33,10 +33,9 @@ server.on("connection",(socket)=>{
         peer.socket.send(JSON.stringify(data));
       }else{
         peers
-          .filter(p=>p.socket !== socket)
+          .filter(p=>p.socket !== socket&&p.address)
           .forEach(p=>p.socket.send(JSON.stringify(data)))
       }
-
     }
   });
 
