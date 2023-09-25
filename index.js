@@ -13,7 +13,7 @@ server.on("connection",(socket)=>{
   console.log(`接続: ${socket.remoteAddress}`);
 
   peers.push({
-    socket: socket
+    "socket": socket
   });
 
   const timeout = setTimeout(()=>{
@@ -36,7 +36,7 @@ server.on("connection",(socket)=>{
         console.log(`送信: ${data}`);
         peers
           .filter(p=>p.socket !== socket&&p.address)
-          .forEach(p=>p.socket.send(JSON.stringify(data)))
+          .forEach(p=>p.socket.send(JSON.stringify(data)));
       }
     }
   });
