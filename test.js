@@ -1,4 +1,5 @@
 const Websocket = require("ws");
+const readline = require("readline");
 const parse = require("./lib/parse");
 
 const client = new Websocket("ws://localhost:3000");
@@ -25,4 +26,18 @@ client.on("message",(_data)=>{
   if(!data) return;
 
   console.log(data);
+});
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+rl.prompt();
+
+rl.on("line",(line)=>{
+  client.send(JSON.stringify({
+    "event": "TEST",
+    "address": "Seg4sh"
+  }))
 });

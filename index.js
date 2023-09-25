@@ -10,14 +10,13 @@ console.log("起動しました");
 
 let peers = [];
 server.on("connection",(socket)=>{
-  console.log(`接続: ${socket.remoteAddress}`);
+  console.log("接続");
 
-  peers.push({
-    "socket": socket
-  });
+  peers.push({"socket": socket});
 
   const timeout = setTimeout(()=>{
     peers = peers.filter(p=>p.socket !== socket);
+    console.log("認証失敗");
   },5000);
 
   socket.on("message",(_data)=>{
@@ -25,15 +24,18 @@ server.on("connection",(socket)=>{
     if(!data) return;
 
     if(data.event === "AUTH"){
-      console.log(`認証: ${data.data}(${socket.remoteAddress})`);
-      peers[peers.findIndex(p=>p.socket !== socket)].address = data.data;
+      console.log(`認証: ${data.data}`);
+      clearTimeout(timeout);
+      peers[peers.findIndex(p=>p.socket === socket)].address = data.data;
     }else{
-      const peer = peers.find(p=>p.address === data.address);
-      if(peer){
-        console.log(`転送(${peer.socket.remoteAddress}): ${data}`);
+      if(data.address){
+        const peer = peers.find(p=>p.address === data.address);
+        if(!peer) return;
+
+        console.log(`転送: ${JSON.stringify(data)}`);
         peer.socket.send(JSON.stringify(data));
       }else{
-        console.log(`送信: ${data}`);
+        console.log(`送信: ${JSON.stringify(data)}`);
         peers
           .filter(p=>p.socket !== socket&&p.address)
           .forEach(p=>p.socket.send(JSON.stringify(data)));
@@ -42,7 +44,7 @@ server.on("connection",(socket)=>{
   });
 
   socket.on("close",()=>{
-    console.log(`切断: ${socket.remoteAddress}`);
+    console.log("切断");
     peers = peers.filter(p=>p.socket !== socket);
   });
 });
