@@ -17,7 +17,7 @@ server.on("connection",(socket)=>{
   const timeout = setTimeout(()=>{
     peers = peers.filter(p=>p.socket !== socket);
     console.log("認証失敗");
-  },5000);
+  },3000);
 
   socket.on("message",(_data)=>{
     const data = parse(_data.toString());
