@@ -16,6 +16,7 @@ server.on("connection",(socket)=>{
 
   const timeout = setTimeout(()=>{
     peers = peers.filter(p=>p.socket !== socket);
+    socket.destroy();
     console.log("認証失敗");
   },3000);
 
