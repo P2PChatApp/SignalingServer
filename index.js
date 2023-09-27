@@ -28,7 +28,7 @@ server.on("connection",(socket)=>{
       console.log(`認証: ${data.data}`);
       clearTimeout(timeout);
       peers[peers.findIndex(p=>p.socket === socket)].address = data.data;
-    }else{
+    }else if(peers.find(p=>p.socket === socket)?.address){
       if(data.address){
         const peer = peers.find(p=>p.address === data.address);
         if(!peer) return;
