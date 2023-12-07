@@ -16,7 +16,7 @@ server.on("connection",(socket)=>{
 
   const timeout = setTimeout(()=>{
     peers = peers.filter(p=>p.socket !== socket);
-    socket.destroy();
+    socket.close();
     console.log("認証失敗");
   },3000);
 
@@ -24,10 +24,10 @@ server.on("connection",(socket)=>{
     const data = parse(_data.toString());
     if(!data) return;
 
-    if(data.event === "AUTH"){
-      console.log(`認証: ${data.data}`);
+    if(data.type === "AUTH"){
+      console.log(`認証: ${data.client.id}`);
       clearTimeout(timeout);
-      peers[peers.findIndex(p=>p.socket === socket)].address = data.data;
+      peers[peers.findIndex(p=>p.socket === socket)].address = data.client.id;
     }else if(peers.find(p=>p.socket === socket)?.address){
       if(data.address){
         const peer = peers.find(p=>p.address === data.address);
