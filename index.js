@@ -3,7 +3,7 @@ require("dotenv").config();
 const parse = require("./lib/parse");
 
 const server = new WebSocket.Server({
-  port: 3004
+  port: 3005
 });
 
 console.log("起動しました");
