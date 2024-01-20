@@ -5,14 +5,14 @@ const parse = require("./lib/parse");
 const client = new Websocket("ws://localhost:3000");
 
 client.on("close",(code,reason)=>{
-  console.log(`切断: ${code} ${reason}`); 
+  console.log(`切断: ${code} ${reason}`);
 });
 
 client.on("error",(error)=>{
-  console.log(`エラー: ${error}`); 
+  console.log(`エラー: ${error}`);
 });
 
-client.on("open",(error)=>{
+client.on("open",()=>{
   console.log("接続");
 
   client.send(JSON.stringify({
