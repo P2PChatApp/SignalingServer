@@ -3,7 +3,7 @@ require("dotenv").config();
 const parse = require("./lib/parse");
 
 const server = new WebSocket.Server({
-  port: 3005
+  port: 3000
 });
 
 console.log("起動しました");
@@ -49,3 +49,14 @@ server.on("connection",(socket)=>{
     peers = peers.filter(p=>p.socket !== socket);
   });
 });
+
+process.on("uncaughtException",async(error)=>{
+  console.log(error.stack);
+});
+
+process.on("unhandledRejection",async(error)=>{
+  console.log(error.stack);
+});
+
+
+
